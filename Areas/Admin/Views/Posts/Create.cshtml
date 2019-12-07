@@ -1,0 +1,54 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@if (TempData.ContainsKey("LinkError"))
+{
+    <p class="text-danger">@TempData["LinkError"]</p>
+}
+<h1 class="text-center">Create post</h1>
+
+<form asp-action="Create" asp-controller="Posts" asp-area="Admin" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title">Post Title</label>
+        <input class="form-control" placeholder="Enter post title" asp-for="Title">
+    </div>
+    <div class="form-group">
+        <label>Use a link to upload image</label>
+        <input id="uploadImgByLink" form-control" name="url" placeholder="Add post image">
+    </div>
+    <div class="form-group">
+        <label>Upload image from computer</label>
+        <input id="uploadFileInput" form-control" type="file" name="uploadImg" placeholder="Choose file">
+    </div>
+    <div class="form-group">
+        <label asp-for="Text">Post text</label>
+        <textarea class="form-control" asp-for="Text" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            let value;
+            $('#uploadFileInput').change(function () {
+                value = $("#uploadFileInput").val();
+                if (value) {
+                    $("#uploadImgByLink").attr("disabled", true);
+                }
+            });
+            $('#uploadImgByLink').change(function () {
+                value = $("#uploadImgByLink").val();
+                if (value) {
+                    $("#uploadFileInput").attr("disabled", true);
+                }
+            });
+
+        });
+
+    </script>
+}

@@ -1,0 +1,28 @@
+﻿@model Game
+
+
+<div class="col-sm-6 col-md-4">
+    <div class="card card-sm mb-4">
+        <a class="card-img card-img-lg" href="game-post.html">
+            <img class="card-img-top" src="@(Model.background_image ?? "/images/placeholder.jpg")"
+                 alt="@Model.slug" onerror="event.target.src = '/images/placeholder.jpg'">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="ya ya-check-circle text-success"
+                   data-toggle="tooltip" data-placement="bottom" data-title="Available"></i><a asp-controller="Home" asp-action="GameDetails" asp-route-id="@Model.id">@Model.name</a>
+            </h5>
+            @*<p class="card-text font-size-md">
+                His vengeance against the Gods of Olympus years
+                behind him, Kratos now lives as a man in the realm of Norse Gods and mon...
+            </p>*@
+            @*<div class="btn-group"><a class="btn btn-default btn-xs" href="#">PS4</a></div>*@
+        </div>
+        <div class="card-footer">
+            <span><i class="ya ya-calendar"></i>@Model.released</span>
+            @*<div class="ml-auto">
+                <a href="#"><i class="ya ya-comment"></i> 675</a><a class="ml-1" href="#"><i class="ya ya-heart-o"></i> 49</a>
+            </div>*@
+        </div>
+    </div><!-- end .card -->
+</div>

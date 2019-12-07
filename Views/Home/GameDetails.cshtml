@@ -1,0 +1,284 @@
+﻿@model GameDetailsViewModel
+
+@{
+    ViewData["Title"] = "GameDetails";
+}
+
+<section class="bg-image bg-dark py-5 py-lg-7 px-4 px-lg-0" ya-style="background-color: #393a3e">
+    <img class="background" src="@Model.Game.background_image" alt="">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-10 col-lg-8 order-2 order-md-2 text-center text-md-left">
+                <h1 class="display-5 font-weight-bold text-white">@Model.Game.name</h1>
+            </div>
+            @*<div class="col-md-2 col-lg-4 order-1 order-md-2 d-flex align-items-md-center justify-content-center justify-content-md-end text-center mb-4 mb-md-0">
+                    <div>
+                        <p class="font-weight-semibold text-white d-none d-md-inline-block">Gameforest</p><a class="easypiechart" href="review-post.html" data-percent="89"
+                                                                                                             data-scale-color="#e3e3e3" data-bar-color="#5eb404">
+                            <span class="easypiechart-text">89%</span>
+                        </a>
+                    </div>
+                    <div class="ml-3 d-none d-lg-inline-block">
+                        <p class="font-weight-semibold text-white">MetaCritic</p><a class="review-score"
+                                                                                    href="review-post.html">9.1</a>
+                    </div>
+                    <div class="ml-3 d-none d-lg-inline-block">
+                        <p class="font-weight-semibold text-white">Users</p><a class="review-score"
+                                                                               href="review-post.html">9.4</a>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="post">
+                    <div class="post-thumbnail">
+                        <img class="post-img"
+                             src="@Model.Game.background_image"
+                             alt="@Model.Game.name">
+                    </div>
+                    <div class="post-body">
+                        <h2 class="post-title">
+                            <a>
+                                @Model.Game.name
+                            </a>
+                        </h2>
+                        <div class="post-meta">
+                            <span class="post-meta-item">
+                                <i class="ya ya-calendar"></i>
+                                @Model.Game.released
+                            </span>
+                        </div>
+                        <p>
+                            @Html.Raw(Model.Game.description)
+                        </p>
+                        <p><b>Also you can buy this game in following stores:</b></p>
+                        <div>
+                            @foreach (var item in Model.StoresList)
+                            {
+                                <a href="@item.url" store="@item"></a>
+                            }
+                        </div>
+                    </div>
+                </div><!-- end .post -->
+                <div class="col-lg-8">
+                    <div class="post">
+                        <div class="post-thumbnail">
+                            @*<div ya-embed="@Model.Game.clip.clip">
+                            <img class="embed-responsive-item"
+                                 src="@Model.Game.background_image"
+                                 alt="">
+                            </div>*@
+
+                            @if (Model.Game.clip != null)
+                            {
+
+                                <video controls>
+                                    <source src="@Model.Game.clip.clip" type="video/mp4">
+                                </video>
+                            }
+                            else
+                            {
+                                <img src="~/images/video-placeholder.jpg" />
+                            }
+                        </div>
+                        <!-- end .post -->
+                    </div>
+                </div>
+
+
+                @*</div>*@
+            </div>
+
+            <div class="col-lg-4">
+                <div class="widget widget-game" ya-style="background-color: #343538">
+                    <img src="@Model.Game.background_image" alt="">
+                    <div class="widget-body">
+                        <h3 class="widget-title text-white">@Model.Game.name</h3>
+                        <p class="font-weight-light font-size-md">Released @Model.Game.released</p>
+                        <h6>Platforms:</h6>
+                        @foreach (var item in Model.Game.platforms)
+                        {
+                            <a class="badge badge-primary" href="#">@item.platform.name</a>
+                        }
+                        <h6 class="mt-4">Developer</h6>
+                        @foreach (var item in Model.Game.developers)
+                        {
+                            <a class="font-weight-light font-size-md"
+                               href="#">@item.name</a>
+                        }
+
+                        <h6 class="mt-4">Genre</h6>
+                        @foreach (var item in Model.Game.genres)
+                        {
+                            <a class="font-weight-light font-size-md" href="#">@item.name</a>
+                        }
+
+                    </div>
+                </div><!-- end .widget -->
+                @*<div class="widget widget-secondary">
+                    <div class="widget-header">Navigation</div>
+                    <div class="widget-body p-0">
+                        <div class="list-group list-group-flush">
+                            <a class="list-group-item list-group-item-action active" href="#">
+                                <i class="ya ya-content"></i> Articles
+                            </a><a class="list-group-item list-group-item-action" href="#">
+                                <i class="ya ya-star"></i> Reviews<span class="badge badge-secondary badge-pill">14</span>
+                            </a><a class="list-group-item list-group-item-action" href="#">
+                                <i class="ya ya-image"></i> Images<span class="badge badge-secondary badge-pill">42</span>
+                            </a><a class="list-group-item list-group-item-action" href="#">
+                                <i class="ya ya-player"></i> Videos
+                            </a><a class="list-group-item list-group-item-action" href="#">
+                                <i class="ya ya-camera"></i> Streams<span class="badge badge-secondary badge-pill">23</span>
+                            </a><a class="list-group-item list-group-item-action" href="#">
+                                <i class="ya ya-comment"></i> Forums
+                            </a><a class="list-group-item list-group-item-action" href="#">
+                                <i class="ya ya-shopping-cart"></i> Shop
+                            </a>
+                        </div>
+                    </div>
+                </div>*@<!-- end .widget -->
+       
+            </div>
+
+        </div>
+        <section class="py-lg-5 px-1 px-md-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <div id="comments" class="anchor comments">
+                            <div class="d-flex align-items-center mb-3">
+                                <h5 class="mb-0">
+                                    <i class="ya ya-comment mr-1"></i>
+                                    @Model.ReviewCount
+                                    @if (Model.ReviewCount <= 1)
+                                    {
+                                        <span>Comment</span>
+
+                                    }
+                                    else
+                                    {
+                                        <span>Comments</span>
+
+                                    }
+
+                                </h5>
+                            </div>
+                            <div class="alert alert-primary">Please login to submit a comment under this post!</div>
+                            <div class="media">
+
+                                @foreach (var item in Model.Reviews)
+                                {
+                                    <div class="avatar avatar-badge">
+                                        <img src="img/user-3.jpg" alt="Guest"><a class="badge badge-primary" href="#" data-toggle="tooltip"
+                                                                                     data-placement="bottom" title="Add friend">
+                                            <i class="ya ya-user-add"></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="d-flex">
+                                            <div class="d-flex">
+                                                <a class="h6" href="profile.html">@item.UserName</a>
+                                                <div class="media-meta">7 hours ago</div>
+                                            </div>
+                                            @*<div class="media-tools">
+                        <a class="btn btn-link btn-icon btn-xs" href="#"
+                           data-toggle="tooltip" title="hide"><i class="ya ya-hide"></i></a><a class="btn btn-link btn-icon btn-xs" href="#" data-toggle="tooltip"
+                                                                                               title="report"><i class="ya ya-flag"></i></a>
+                    </div>*@
+                                        </div>
+                                        <p>
+                                            @item.Comment
+                                        </p>
+                                        @*<div class="d-flex align-items-center">
+                    <button class="btn btn-default btn-xs mr-2">
+                        Reply
+                    </button><button class="btn btn-default btn-xs">
+                        <i class="ya ya-like ml-0"></i>
+                        (96)
+                    </button>
+                </div>*@
+                                    </div>
+                                }
+
+                            </div><!-- end .media -->
+
+                        </div><!-- end .comments -->
+                        <h5 class="mt-4 mt-md-5">Leave a comment</h5>
+                        <form asp-controller="Home" asp-action="PostReview" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <input type="hidden" asp-for="Review.GameId" value="@Model.Game.id" />
+                            <div class="form-group">
+                                <label asp-for="Review.UserEmail">Email address</label>
+                                <input asp-for="Review.UserEmail" class="form-control" placeholder="Enter your email">
+                                <span asp-validation-for="Review.UserEmail" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Review.UserName">Name</label>
+                                <input type="text" class="form-control" id="UserName" asp-for="Review.UserName" placeholder="Enter your Name">
+                                <span asp-validation-for="Review.UserName" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Review.Comment">Enter your comment</label>
+                                <textarea class="form-control" id="Comment" asp-for="Review.Comment" rows="3"></textarea>
+                                <span asp-validation-for="Review.Comment" class="text-danger"></span>
+
+                            </div>
+                            @*<div class="custom-control custom-checkbox">
+                                <input type="checkbox"
+                                       class="custom-control-input" id="check"><label class="custom-control-label"
+                                                                                      for="check">notify me when someone replies</label>
+                            </div>*@<button
+                                            class="btn btn-primary mt-4">
+                                Submit comment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <h2 class="text-center">Similar games:</h2>
+        <div class="row">
+
+            @foreach (var item in Model.SimilarGames)
+            {
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-sm mb-4">
+                        <a class="card-img card-img-lg" href="game-post.html">
+                            <img class="card-img-top" src="@(item.background_image ?? "/images/placeholder.jpg")"
+                                 alt="@item.slug" onerror="event.target.src = '/images/placeholder.jpg'">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="ya ya-check-circle text-success"
+                                   data-toggle="tooltip" data-placement="bottom" data-title="Available"></i><a asp-controller="Home" asp-action="GameDetails" asp-route-id="@item.id">@item.name</a>
+                            </h5>
+                            @*<p class="card-text font-size-md">
+                                His vengeance against the Gods of Olympus years
+                                behind him, Kratos now lives as a man in the realm of Norse Gods and mon...
+                            </p>*@
+                            @*<div class="btn-group"><a class="btn btn-default btn-xs" href="#">PS4</a></div>*@
+                        </div>
+                        <div class="card-footer">
+                            <span><i class="ya ya-calendar"></i>@item.released</span>
+                            @*<div class="ml-auto">
+                                <a href="#"><i class="ya ya-comment"></i> 675</a><a class="ml-1" href="#"><i class="ya ya-heart-o"></i> 49</a>
+                            </div>*@
+                        </div>
+                    </div><!-- end .card -->
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
