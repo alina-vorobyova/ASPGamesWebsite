@@ -29,39 +29,20 @@
                     </button><a class="navbar-brand" asp-controller="Home" asp-action="Index">Gameforest</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" asp-controller="Home" asp-action="Index"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                               
-                                <div class="dropdown-menu">
+                                @*<div class="dropdown-menu">
                                     <a class="dropdown-item" asp-controller="Home" asp-action="PostBlog">Blogs</a><a class="dropdown-item" href="home-magazine.html">Magazine</a><a class="dropdown-item" href="index-2.html">Landing</a><a class="dropdown-item"
                                                                                                                                                                                                                        href="home-games.html">Games</a><a class="dropdown-item"
                                                                                                                                                                                                                                                           href="home-streamer.html">Streamer</a><a class="dropdown-item"
                                                                                                                                                                                                                                                                                                    href="home-videos.html">Videos</a>
-                                </div>
+                                </div>*@
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="blog.html">List</a><a class="dropdown-item" href="blog-sidebar.html">List Sidebar</a><a class="dropdown-item" href="blog-card.html">List Card</a><a class="dropdown-item" href="blog-medium.html">List Medium</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item"
-                                                                           href="blog-post.html">Single Post</a><a class="dropdown-item"
-                                                                                                                   href="blog-post-gallery.html">Gallery Post</a><a class="dropdown-item"
-                                                                                                                                                                    href="blog-post-carousel.html">Carousel Post</a><a class="dropdown-item"
-                                                                                                                                                                                                                       href="blog-post-video.html">Video Post</a>
-                                    <div class="dropdown">
-                                        <a class="dropdown-item" href="#" data-toggle="dropdown"
-                                           aria-haspopup="true" aria-expanded="false">Comments</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="blog-post-disqus.html">Disqus</a><a class="dropdown-item"
-                                                                                         href="blog-post-facebook.html">Facebook</a>
-                                        </div>
-                                    </div>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="PostBlog" asp-controller="Home">Blog</a>
                             </li>
-                            <li class="nav-item dropdown dropdown-lg dropdown-carousel">
+                            @*<li class="nav-item dropdown dropdown-lg dropdown-carousel">
                                 <a class="nav-link dropdown-toggle" href="games.html" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">Games</a>
                                 <div class="dropdown-menu">
@@ -324,8 +305,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li>*@
+                            @*<li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                                 <div class="dropdown-menu">
@@ -334,7 +315,7 @@
                                                                            href="shop-cart.html">Cart Overview</a><a class="dropdown-item"
                                                                                                                      href="shop-checkout.html">Checkout</a>
                                 </div>
-                            </li>
+                            </li>*@
                         </ul>
                     </div><!-- end .navbar-collapse -->
                     <form class="navbar-search" method="get" asp-controller="Home" asp-action="Search">
