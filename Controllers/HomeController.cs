@@ -17,14 +17,23 @@ namespace GamesSearchAsp.Controllers
         private readonly IGameSearchService gamesSearchService;
         private readonly IReviewService reviewService;
         private readonly IPostService postService;
+        private readonly IGameProductService gameProductService;
 
-        public HomeController(IGameSearchService gamesSearchService, IReviewService reviewService, IPostService postService)
+        public HomeController(IGameSearchService gamesSearchService, IReviewService reviewService, IPostService postService, IGameProductService gameProductService)
         {
             this.gamesSearchService = gamesSearchService;
             this.reviewService = reviewService;
             this.postService = postService;
+            this.gameProductService = gameProductService;
         }
 
+        public async Task<IActionResult> Shop()
+        {
+            var games = await gameProductService.GetAllGameProductsAsync();
+            return View(games);
+        }
+
+        
 
         public async Task<IActionResult> Search(string title, int page = 1)
         {

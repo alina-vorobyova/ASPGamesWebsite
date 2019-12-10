@@ -20,7 +20,7 @@
                     <input class="form-control" v-model="gameName" type="search" list="game" v-on:input="onInputChanged" />
                     <input type="hidden" asp-for="GameId" id="GameHiddenInput" />
                     <datalist id="game">
-                        <option v-for="item in gameList" v-bind:value="item.name" v-bind:id="item.id"></option>
+                        <option v-for="item in gameList" v-bind:value="item.id + ':' + item.name" v-bind:id="item.id"></option>
                     </datalist>
                     <span asp-validation-for="GameId" class="text-danger"></span>
                 </div>

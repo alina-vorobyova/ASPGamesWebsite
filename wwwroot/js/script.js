@@ -1,5 +1,4 @@
 ﻿const apiUrl = 'https://api.rawg.io/api';
-//let selectedOptionInDatalist = 
 
 async function SearchGameByName(gameName) {
     let response = await fetch(`${apiUrl}/games?search=${gameName}&ordering=-rating&page_size=10`);
@@ -17,16 +16,14 @@ let app = new Vue({
         },
 
         methods: {
-            //onGameProductFormSubmit: async function () {
-            //    let response = await SearchGameByName(this.gameName);
-            //    this.gameList = response.results;
-            //    console.log(response.results);
-
-            //},
             onInputChanged:async function () {
                 let response = await SearchGameByName(this.gameName);
                 this.gameList = response.results;
-                console.log(response.results);
+                let searchedGame = $("input[type=search]").val().split(":");
+                let gameId = searchedGame[0];
+                $("#GameHiddenInput").val(gameId);
+                //console.log(searchedGame[0]);
+                //console.log(response.results);
             }
         }
     });

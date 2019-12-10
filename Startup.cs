@@ -41,6 +41,8 @@ namespace GamesSearchAsp
 
             services.AddScoped<IReviewService, ReviewService>();
 
+            services.AddScoped<IGameProductService, GameProductService>();
+
             services.Configure<GameApiOptions>(options =>
             {
                 options.Url = Configuration["GameApiUrl"];
