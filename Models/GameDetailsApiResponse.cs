@@ -63,7 +63,11 @@ namespace GamesSearchAsp.Models
         public Esrb_Rating esrb_rating { get; set; }
         public Clip clip { get; set; }
         public string description_raw { get; set; }
+        public Short_Screenshots[] short_screenshots { get; set; }
+
     }
+
+
 
 
     public class Esrb_Rating

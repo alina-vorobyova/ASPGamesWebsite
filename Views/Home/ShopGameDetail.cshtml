@@ -1,0 +1,126 @@
+﻿@model ShopGameDetailsViewModel
+@{
+    ViewData["Title"] = "ShopGameDetail";
+}
+
+<section class="pt-0 py-lg-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product mb-4 mb-lg-0">
+                    @if (Model.Game.short_screenshots != null)
+                    {
+                        <div class="owl-carousel product-carousel" ya-carousel="nav: false">
+
+                            @foreach (var item in Model.Game.short_screenshots)
+                            {
+                                <div class="product-img">
+                                    <img src="@item.image" alt="">
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="owl-carousel product-carousel" ya-carousel="nav: false">
+                            <div class="product-img">
+                                <img src="@Model.Game.background_image" alt="">
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <form action="https://gameforest.netlify.com/shop-cart.html">
+                    <div class="mb-4 pb-4 border-bottom-dashed">
+                        <h1 class="font-weight-bold">@Model.Game.name</h1>
+                        <div class="d-flex align-items-center">
+                            @*<div class="star d-flex font-size-md mr-2">
+                                    <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i><i class="ya ya-star text-muted"></i>
+                                </div>*@
+                            @*<div class="text-muted">
+                                    <span class="font-weight-semibold">25</span> Reviews
+                                </div>*@
+                        </div>
+                    </div>
+                    @*<p class="mb-4">
+                            Red Dead Redemption 2 is an epic tale of life in America’s unforgiving
+                            heartland. The game's vast and atmospheric world also provides the foundation for a
+                            brand new online multiplayer experience. America, 1899. The end of the wild...
+                        </p>*@
+                    <ul class="list-inline mb-4 d-flex align-items-center">
+                        <li class="list-inline-item display-5 font-weight-bold">$@Model.GameFromDb.Price</li>
+                        @*  <li class="list-inline-item text-muted font-weight-light"><del>$90.00</del></li>*@
+                    </ul>
+                    <ul class="list-unstyled mb-4">
+                        <li>
+                            Genre:
+                            @foreach (var item in Model.Game.genres)
+                            {
+                                @item.name
+
+                            }
+                            ,
+                        </li>
+                        <li>
+                            Publisher:
+                            @foreach (var item in Model.Game.developers)
+                            {
+                                @item.name
+
+                            }
+                            ,
+                        </li>
+
+                    </ul>
+                    <div class="d-lg-flex align-items-center">
+                        <h6 class="mb-3 mb-lg-0 mr-3">Platform:</h6>
+                        <div>
+                            <div class="custom-control custom-radio custom-control-inline mr-2">
+                                <input type="radio" id="platform1" name="platform" class="custom-control-input" checked />
+                                <label class="custom-control-label" for="platform1">@Model.GameFromDb.GamePlatform.PlatformName</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    @*<div class="tags mt-4 mb-4">
+                            <a href="#">#red</a><a href="#">#redemption2</a><a href="#">#large</a><a href="#">#released</a><a href="#">#xbox</a>
+                        </div>*@
+                    <div class="card mb-0">
+                        <div class="card-body">
+                            <button type="submit"
+                                    class="btn btn-primary btn-block font-weight-semibold btn-lg mb-2">
+                                Add to
+                                cart <i class="ya ya-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-5 pt-4 pt-md-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="subtitle font-size-md">Description</h2>
+
+                <p>
+                    @Html.Raw(Model.Game.description)
+                </p>
+                @if (Model.Game.clip != null)
+                {
+                    <video controls>
+                        <source src="@Model.Game.clip.clip" type="video/mp4">
+                    </video>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+

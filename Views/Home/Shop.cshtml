@@ -16,7 +16,7 @@
                     </a>
                     <div class="card-body d-flex align-items-start flex-column">
                         <h5 class="card-title mb-auto">
-                           <a href="shop-product.html">@item.Title</a>
+                           <a asp-action="ShopGameDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title</a>
                         </h5>
                         @*<div class="star d-flex font-size-md mt-1 mr-2">
                             <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i>

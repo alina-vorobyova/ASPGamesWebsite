@@ -21,9 +21,14 @@ namespace GamesSearchAsp.Services
             return await context.GameProducts.Include(x => x.GamePlatform).ToListAsync();
         }
 
-        public Task<GameProduct> GetGameByIdAsync(int id)
+        public async Task<GameProduct> GetGameByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var game = await context.GameProducts.Include(x => x.GamePlatform).FirstOrDefaultAsync(x => x.Id == id);
+            if (game != null)
+            {
+                return game;
+            }
+            throw new Exception("Game not found");
         }
     }
 }

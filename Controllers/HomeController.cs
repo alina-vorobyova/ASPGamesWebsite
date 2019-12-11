@@ -33,7 +33,19 @@ namespace GamesSearchAsp.Controllers
             return View(games);
         }
 
-        
+        public async Task<IActionResult> ShopGameDetail(int id)
+        {
+            var gameFromDb = await gameProductService.GetGameByIdAsync(id);
+            var gameInfoFromApi = await gamesSearchService.SearchByIdAsync(gameFromDb.GameId);
+            var similarGames = await gamesSearchService.SearchSimilarGamesAsync(id);
+            var model = new ShopGameDetailsViewModel
+            {
+                GameFromDb = gameFromDb,
+                Game = gameInfoFromApi,
+                SimilarGames = similarGames.results
+            };
+            return View(model);
+        }
 
         public async Task<IActionResult> Search(string title, int page = 1)
         {
