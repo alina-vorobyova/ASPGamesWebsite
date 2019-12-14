@@ -1,4 +1,6 @@
 ﻿using JetBrains.Annotations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GamesSearchAsp.Models
 {
-    public class GameAppDbContext : DbContext
+    public class GameAppDbContext : IdentityDbContext<AppUser>
     {
         public GameAppDbContext(DbContextOptions options) : base(options)
         {

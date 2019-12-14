@@ -9,6 +9,7 @@ using GamesSearchAsp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,9 @@ namespace GamesSearchAsp
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
 
+            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                  .AddEntityFrameworkStores<GameAppDbContext>();
+
             services.AddScoped<IGameSearchService, GameSearchService>();
 
             services.AddScoped<IPostService, PostService>();
@@ -51,6 +55,8 @@ namespace GamesSearchAsp
             services.AddHttpClient();
 
             services.AddControllersWithViews();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +75,8 @@ namespace GamesSearchAsp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -83,6 +91,8 @@ namespace GamesSearchAsp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }

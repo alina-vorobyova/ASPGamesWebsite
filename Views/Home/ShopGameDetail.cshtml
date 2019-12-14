@@ -8,11 +8,11 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="product mb-4 mb-lg-0">
-                    @if (Model.Game.short_screenshots != null)
+                    @if (Model.Screenshots != null)
                     {
                         <div class="owl-carousel product-carousel" ya-carousel="nav: false">
 
-                            @foreach (var item in Model.Game.short_screenshots)
+                            @foreach (var item in Model.Screenshots.results)
                             {
                                 <div class="product-img">
                                     <img src="@item.image" alt="">
@@ -124,3 +124,153 @@
     </div>
 </section>
 
+<section class="py-lg-5 px-1 px-md-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div id="comments" class="anchor comments">
+                    <div class="d-flex align-items-center mb-3">
+                        <h5 class="mb-0">
+                            <i class="ya ya-comment mr-1"></i>
+                            @Model.ReviewCount
+                            @if (Model.ReviewCount <= 1)
+                            {
+                                <span>Comment</span>
+
+                            }
+                            else
+                            {
+                                <span>Comments</span>
+
+                            }
+
+                        </h5>
+                    </div>
+                    <div class="alert alert-primary">Please login to submit a comment under this post!</div>
+                    <div class="media">
+
+                        @foreach (var item in Model.Reviews)
+                        {
+                            <div class="avatar avatar-badge">
+                                <img src="img/user-3.jpg" alt="Guest"><a class="badge badge-primary" href="#" data-toggle="tooltip"
+                                                                         data-placement="bottom" title="Add friend">
+                                    <i class="ya ya-user-add"></i>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="d-flex">
+                                    <div class="d-flex">
+                                        <a class="h6" href="profile.html">@item.UserName</a>
+                                        <div class="media-meta">7 hours ago</div>
+                                    </div>
+                                    @*<div class="media-tools">
+                                            <a class="btn btn-link btn-icon btn-xs" href="#"
+                                               data-toggle="tooltip" title="hide"><i class="ya ya-hide"></i></a><a class="btn btn-link btn-icon btn-xs" href="#" data-toggle="tooltip"
+                                                                                                                   title="report"><i class="ya ya-flag"></i></a>
+                                        </div>*@
+                                </div>
+                                <p>
+                                    @item.Comment
+                                </p>
+                                @*<div class="d-flex align-items-center">
+                                        <button class="btn btn-default btn-xs mr-2">
+                                            Reply
+                                        </button><button class="btn btn-default btn-xs">
+                                            <i class="ya ya-like ml-0"></i>
+                                            (96)
+                                        </button>
+                                    </div>*@
+                            </div>
+                        }
+
+                    </div><!-- end .media -->
+
+                </div><!-- end .comments -->
+                <h5 class="mt-4 mt-md-5">Leave a comment</h5>
+                <form asp-controller="Home" asp-action="PostReview" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="Review.GameId" value="@Model.Game.id" />
+                    <div class="form-group">
+                        <label asp-for="Review.UserEmail">Email address</label>
+                        <input asp-for="Review.UserEmail" class="form-control" placeholder="Enter your email">
+                        <span asp-validation-for="Review.UserEmail" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Review.UserName">Name</label>
+                        <input type="text" class="form-control" id="UserName" asp-for="Review.UserName" placeholder="Enter your Name">
+                        <span asp-validation-for="Review.UserName" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Review.Comment">Enter your comment</label>
+                        <textarea class="form-control" id="Comment" asp-for="Review.Comment" rows="3"></textarea>
+                        <span asp-validation-for="Review.Comment" class="text-danger"></span>
+
+                    </div>
+                    @*<div class="custom-control custom-checkbox">
+                            <input type="checkbox"
+                                   class="custom-control-input" id="check"><label class="custom-control-label"
+                                                                                  for="check">notify me when someone replies</label>
+                        </div>*@<button class="btn btn-primary mt-4">
+                        Submit comment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <h6 class="subtitle mb-4">You should also like</h6>
+        <div class="row row-md">
+            @foreach (var item in Model.SimilarGames)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 card-group">
+                    <div class="card card-sm mb-4">
+                        <a class="card-img card-img-md" href="shop-product.html">
+                            <img class="card-img-top" src="@item.Image"
+                                 alt="God of War">
+                        </a>
+                        <div class="card-body d-flex align-items-start flex-column">
+                            <h5 class="card-title mb-auto">
+                                <a asp-action="ShopGameDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title</a>
+                            </h5>
+                            @*<div class="star d-flex font-size-md mt-1 mr-2">
+                            <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i>
+                        </div>*@
+                            <ul class="list-unstyled font-size-sm mt-3">
+                                <li>@item.GamePlatform.PlatformName</li> 
+                            </ul>
+                            <ul class="d-flex list-unstyled mb-0 text-nowrap">
+                                @if (item.Count > 0)
+                                {
+                                    <li class="border-right mr-2 pr-2">
+                                        <i class="ya ya-stock text-success mr-1"></i>
+                                        in stock
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="border-right mr-2 pr-2">
+                                        <i class="ya ya-stock text-danger mr-1"></i>
+                                        not in stock
+                                    </li>
+                                }
+
+                                <li><i class="ya ya-delivery text-success mr-1"></i> free delivery</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer d-flex align-items-center">
+                            <div class="h3 font-weight-normal text-dark mb-0 mr-2">$@item.Price</div><button type="button" class="btn btn-outline btn-sm ml-auto">
+                                Add to cart <i class="ya ya-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div><!-- end .card -->
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

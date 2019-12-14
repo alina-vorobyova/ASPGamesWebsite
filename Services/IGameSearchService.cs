@@ -16,5 +16,7 @@ namespace GamesSearchAsp.Services
         public Task<StoresListApiResponse> SearchStoresListAsync(int id);
 
         public Task<StoreInfo> SearchStoreByIdAsync(int id);
+        public Task<ScreenshotsApiResponse> SearchScreenshotsByGameId(int id);
+      
     }
 }

@@ -37,12 +37,20 @@ namespace GamesSearchAsp.Controllers
         {
             var gameFromDb = await gameProductService.GetGameByIdAsync(id);
             var gameInfoFromApi = await gamesSearchService.SearchByIdAsync(gameFromDb.GameId);
-            var similarGames = await gamesSearchService.SearchSimilarGamesAsync(id);
+            var similarGames = await gameProductService.GetSimilarGamesFromDb(gameFromDb.GameId);
+            var screenshots = await gamesSearchService.SearchScreenshotsByGameId(gameFromDb.GameId);
+            var gameReview = await reviewService.GetReviewsAsync(id);
+            Review review = new Review();
+            var reviewCount = gameReview.Count();
             var model = new ShopGameDetailsViewModel
             {
                 GameFromDb = gameFromDb,
                 Game = gameInfoFromApi,
-                SimilarGames = similarGames.results
+                SimilarGames = similarGames,
+                Screenshots = screenshots,
+                Review = review,
+                ReviewCount = reviewCount,
+                Reviews = gameReview
             };
             return View(model);
         }

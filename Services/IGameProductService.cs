@@ -11,5 +11,6 @@ namespace GamesSearchAsp.Services
         Task<IEnumerable<GameProduct>> GetAllGameProductsAsync();
 
         Task<GameProduct> GetGameByIdAsync(int id);
+        Task<IEnumerable<GameProduct>> GetSimilarGamesFromDb(int id);
     }
 }

@@ -10,10 +10,12 @@ namespace GamesSearchAsp.Services
     public class GameProductService : IGameProductService
     {
         private readonly GameAppDbContext context;
+        private readonly IGameSearchService gameSearchService;
 
-        public GameProductService(GameAppDbContext context)
+        public GameProductService(GameAppDbContext context, IGameSearchService gameSearchService)
         {
             this.context = context;
+            this.gameSearchService = gameSearchService;
         }
 
         public async Task<IEnumerable<GameProduct>> GetAllGameProductsAsync()
@@ -30,5 +32,22 @@ namespace GamesSearchAsp.Services
             }
             throw new Exception("Game not found");
         }
+
+        public async Task<IEnumerable<GameProduct>> GetSimilarGamesFromDb(int id)
+        {
+            var similarGamesFromApi = await gameSearchService.SearchSimilarGamesAsync(id);
+            var simirlarGamesFromDb = new List<GameProduct>();
+            foreach (var item in similarGamesFromApi.results)
+            {
+                var foundGames = await context.GameProducts.Include(x => x.GamePlatform).FirstOrDefaultAsync(x => x.GameId == item.id);
+                if (foundGames != null)
+                {
+                    simirlarGamesFromDb.Add(foundGames);
+                }
+            }
+            return simirlarGamesFromDb;
+
+        }
+       
     }
 }

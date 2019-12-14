@@ -105,6 +105,21 @@ namespace GamesSearchAsp.Services
             return result;
         }
 
-       
+        public async Task<ScreenshotsApiResponse> SearchScreenshotsByGameId(int id)
+        {
+            ScreenshotsApiResponse result;
+            if (!memoryCache.TryGetValue($"GameSearchAspScreenshotsKey_{id}", out result))
+            {
+                var response = await httpClient.GetAsync($"{url}/games/{id}/screenshots");
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<ScreenshotsApiResponse>(json);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    throw new Exception("Not found");
+                memoryCache.Set($"GameSearchAspScreenshotsKey_{id}", result);
+            }
+            return result;
+        }
+
     }
 }
