@@ -5,8 +5,102 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+<section class="py-lg-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title">Create a new account</h5>
+                        </div>
+                        <div class="card-body p-3">
+                            @*<div class="row">
+            <div class="col-lg-6">
+                <button class="btn btn-social btn-github btn-block mb-2 mb-lg-0">
+                    <i class="ya ya-github"></i> Register with Github
+                </button>
+            </div>
+            <div class="col-lg-6">
+                <button class="btn btn-social btn-twitch btn-block">
+                    <i class="ya ya-twitch"></i> Register with Twitch
+                </button>
+            </div>
+        </div>*@
 
-<div class="row">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="ya ya-user"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text"
+                                               class="form-control" id="username" placeholder="Username" asp-for="Input.Username">
+                                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                                        <div class="invalid-feedback" style="width: 100%;">
+                                            Your username is
+                                            required.
+                                        </div>
+                                    </div><small id="emailHelp" class="form-text text-muted">
+                                        We'll never share
+                                        your email with anyone else.
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com" asp-for="Input.Email">
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    <small id="emailHelp" class="form-text text-muted">
+                                        We'll never share your email
+                                        with anyone else.
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.Birthday"></label>
+                                    <input asp-for="Input.Birthday" class="form-control" />
+                                    <span asp-validation-for="Input.Birthday" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.AboutMe"></label>
+                                    <textarea asp-for="Input.AboutMe" class="form-control"></textarea>
+                                    <span asp-validation-for="Input.AboutMe" class="text-danger"></span>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-6">
+                                        <label for="password">Password</label><input type="password" class="form-control" id="password"
+                                                                                     placeholder="Enter password" asp-for="Input.Password">
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="repeat-password">
+                                            Repeat
+                                            Password
+                                        </label><input type="password" class="form-control"
+                                                       id="repeat-password" placeholder="Confirm password" asp-for="Input.ConfirmPassword">
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                          
+
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit">
+                                Create an
+                                account
+                            </button>
+                        </div>
+                       
+                    </div><!-- end card -->
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -75,7 +169,7 @@
             }
         </section>
     </div>
-</div>
+</div>*@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

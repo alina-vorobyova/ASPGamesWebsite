@@ -36,7 +36,11 @@ namespace GamesSearchAsp
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
 
-            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<AppUser>(options => {
+                options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM '-_@*1234567890";
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedAccount = false;
+            })
                   .AddEntityFrameworkStores<GameAppDbContext>();
 
             services.AddScoped<IGameSearchService, GameSearchService>();

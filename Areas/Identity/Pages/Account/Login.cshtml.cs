@@ -22,6 +22,7 @@ namespace GamesSearchAsp.Areas.Identity.Pages.Account
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly AppUser user;
 
         public LoginModel(SignInManager<AppUser> signInManager, 
             ILogger<LoginModel> logger,
@@ -47,9 +48,7 @@ namespace GamesSearchAsp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-
+            [Display(Name = "Username/Email")] public string Email { get; set; }
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
@@ -79,11 +78,29 @@ namespace GamesSearchAsp.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
 
-            if (ModelState.IsValid)
-            {
+         
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                if (ModelState.IsValid)
+                {
+                    var userName = Input.Email;
+                    if (userName.Contains('@'))
+                    {
+                        var user = await _userManager.FindByEmailAsync(Input.Email);
+                        if (user == null)
+                        {
+                            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                            return Page();
+                        }
+                        else
+                        {
+                            userName = user.UserName;
+                        }
+                    }
+                    var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+                    //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+               
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
