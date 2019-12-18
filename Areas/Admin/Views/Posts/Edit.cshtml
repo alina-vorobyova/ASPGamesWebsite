@@ -9,6 +9,8 @@
 <h1 class="text-center">Edit post</h1>
 
 <form asp-action="Edit" asp-controller="Posts" asp-area="Admin" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input  type="hidden" asp-for="ImageUrl" />
     <div class="form-group">
         <label asp-for="Title">Post Title</label>
         <input class="form-control" placeholder="Enter post title" asp-for="Title">

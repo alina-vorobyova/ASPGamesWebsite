@@ -89,28 +89,20 @@ namespace GamesSearchAsp.Areas.Admin.Controllers
         {
             try
             {
+                string path = null;
                 if (uploadImg != null)
                 {
-                    var path = await FileUploadHelper.UploadFile(uploadImg);
+                    path = await FileUploadHelper.UploadFile(uploadImg);
                     post.ImageUrl = path;
-                    if (ModelState.IsValid)
-                    {
-                        post.Date = DateTime.Now;
-                        await postService.UpdatePostAsync(post);
-                        return RedirectToAction("Index");
-                    }
                 }
-                else
+                else if(post.ImageUrl != url)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        post.Date = DateTime.Now;
-                        var path = await ImageLoader.DownloadFile(url);
-                        post.ImageUrl = path;
-                        await postService.UpdatePostAsync(post);
-                        return RedirectToAction("Index");
-                    }
+                    var pathUrl = await ImageLoader.DownloadFile(url);
+                    post.ImageUrl = pathUrl;
                 }
+                post.Date = DateTime.Now;
+                await postService.UpdatePostAsync(post);
+                return RedirectToAction("Index");
             }
             catch (Exception)
             {

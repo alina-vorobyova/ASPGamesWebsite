@@ -128,28 +128,21 @@ namespace GamesSearchAsp.Areas.Admin.Controllers
             {
                 try
                 {
+                    string path = null;
                     if (uploadImg != null)
                     {
-                        var path = await FileUploadHelper.UploadFile(uploadImg);
+                        path = await FileUploadHelper.UploadFile(uploadImg);
                         gameProduct.Image = path;
-                        if (ModelState.IsValid)
-                        {
-                            _context.GameProducts.Update(gameProduct);
-                            await _context.SaveChangesAsync();
-                            return RedirectToAction(nameof(Index));
-                        }
                     }
-                    else
+                    else if (gameProduct.Image != url)
                     {
-                        if (ModelState.IsValid)
-                        {
-                            var path = await ImageLoader.DownloadFile(url);
-                            gameProduct.Image = path;
-                            _context.GameProducts.Update(gameProduct);
-                            await _context.SaveChangesAsync();
-                            return RedirectToAction(nameof(Index));
-                        }
+                        var pathUrl = await ImageLoader.DownloadFile(url);
+                        gameProduct.Image = pathUrl;
                     }
+
+                    _context.GameProducts.Update(gameProduct);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -162,7 +155,7 @@ namespace GamesSearchAsp.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             ViewData["GamePlatformId"] = new SelectList(_context.GamePlatforms, "Id", "PlatfromName", gameProduct.GamePlatformId);
             return View(gameProduct);

@@ -1,0 +1,137 @@
+﻿@page "{id}"
+@model GamesSearchAsp.Areas.Identity.Pages.Account.Manage.Profile.EditProfileModel
+@{
+    Layout = "../../../../../../Views/Shared/_Layout.cshtml";
+}
+
+<section class="overflow-hidden py-0" data-parallax="scroll"
+         data-image-src="https://static.giantbomb.com/uploads/original/0/5370/2791736-7947254676-Star_.jpg">
+    <div class="overlay" ya-style="background-color: #36373a;opacity: .9"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-white py-7 mb-0 mt-3">Profile Settings</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex align-items-center">
+                <div class="nav-scroll">
+                    <div class="nav nav-list nav-light">
+                        <a class="nav-item nav-link active pl-0"
+                           href="#">Account settings</a><a class="nav-item nav-link"
+                                                           href="#">Security</a><a class="nav-item nav-link" href="#">Access</a><a class="nav-item nav-link" href="#">History</a><a class="nav-item nav-link"
+                                                                                                                                                                                    href="#">Billings</a><a class="nav-item nav-link" href="#">Premium</a>
+                    </div>
+                </div><a class="btn btn-outline-light btn-icon ml-auto mb-3 d-none d-md-inline"
+                         href="profile.html">View my profile</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+
+        <form asp-area="Identity" asp-page="EditProfile" method="post" enctype="multipart/form-data">
+            <h5 class="font-weight-bold font-size-md text-uppercase mb-4 pb-1">Profile Information</h5>
+            <input type="hidden" asp-for="Image"/>
+            <div>
+                <img src="~/@Model.Image" alt="" width="100">
+            </div>
+            <div class="form-group">
+                <label>Use a link to upload image</label>
+                <input value="@Model.Image" id="uploadImgByLink" form-control" name="ImgUrl" placeholder="Add profile image">
+            </div>
+            <div class="form-group">
+                <label>Upload image from computer</label>
+                <input id="avatar" form-control" value="@Model.Image" type="file" name="ImgFile" placeholder="Choose file">
+            </div>
+            <small class="d-block mt-3 form-text mb-3">
+                For best results, use an image at least 180px by
+                180px in either .jpg or .png format
+            </small>
+            <input type="hidden" asp-for="Id"/>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="username">Username</label><input type="text"
+                                                                 class="form-control" id="username" asp-for="UserName"
+                                                                 placeholder="Enter Username"><small class="form-text text-muted">
+                        The name what will
+                        be visible on community pages.
+                    </small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="email"
+                               asp-for="Email" placeholder="Enter your email address">
+                        <div class="input-group-append">
+                            <button type="button"
+                                    class="btn btn-light btn-icon border-left-0" data-toggle="tooltip"
+                                    title="Enter a valid email address.">
+                                <i class="ya ya-help-circle"></i>
+                            </button>
+                        </div>
+                    </div><small class="form-text text-muted">
+                        We’ll never share your email with anyone
+                        else.
+                    </small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label for="birthday">Birthday</label>
+                        <input asp-for="Birthday" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group mb-0">
+                <label for="about-me">About me</label><textarea asp-for="AboutMe" class="form-control" id="about-me" rows="5"></textarea><small class="form-text text-muted">
+                    A short description about yourself and your duty. You can
+                    @@mention other users and organizations to link to them.
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">
+                Update profile
+            </button>
+        </form><!-- end form -->
+    </div>
+</section>
+<section class="border-top-dashed py-5">
+    <div class="container">
+        <form>
+            <h5 class="font-weight-bold font-size-md text-uppercase mb-4 pb-1">Change Password</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Current Password</label><input type="password" class="form-control" id="password"
+                                                                             placeholder="Enter Password"><small class="form-text text-muted">
+                            Enter your
+                            current password into the input area.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-md-2">
+                        <label for="new-password">New Password</label><input type="password" class="form-control" id="new-password"
+                                                                             placeholder="Enter New Password">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label for="confirm-password">
+                            Confirm
+                            Password
+                        </label><input type="password" class="form-control"
+                                       id="confirm-password" placeholder="Confirm Password">
+                    </div>
+                </div>
+            </div><button type="button" class="btn btn-danger mt-4">Change password</button>
+        </form><!-- end form -->
+    </div>
+</section>
