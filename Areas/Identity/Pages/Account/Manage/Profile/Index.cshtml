@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id}"
 @model GamesSearchAsp.Areas.Identity.Pages.Account.Manage.Profile.IndexModel
 @{
     Layout = "../../../../../../Views/Shared/_Layout.cshtml";
@@ -8,16 +8,15 @@
 <section class="bg-image bg-dark d-flex align-items-end py-3"
          style="background-color: #3a3a3c !important;min-height: 320px;">
     <img class="background"
-         src="../img.youtube.com/vi/715r-8JJhpM/maxresdefault.jpg" alt="" ya-style="opacity: .25">
+         src="@Model.Image" alt="" ya-style="opacity: .25">
     <div class="container position-relative">
         <div class="row">
             <div class="col d-flex flex-column flex-lg-row align-items-center text-center position-absolute bottom left pl-lg-8">
                 <a class="avatar-thumbnail avatar-lg d-lg-none bg-dark mb-3 mb-lg-0 border-0" href="#">
-                    <img src="~/img/user-profile.jpg" alt="">
+                    <img src="@Model.Image" alt="">
                 </a>
                 <h2 class="h4 text-white mb-0 ml-2 pl-lg-8">
-                    <i class="ya ya-check bg-primary float-left font-size-xs rounded-circle p-2 mr-2"
-                       data-toggle="tooltip" title="verified user"></i> Nathan Drake
+                    @Model.UserName
                 </h2>
                 <div class="ml-lg-auto mt-4 mb-3 my-lg-0">
                     <a class="btn btn-primary btn-sm btn-icon-left font-weight-semibold" href="#">
@@ -34,12 +33,12 @@
         <div class="row">
             <div class="col d-flex align-items-center">
                 <a class="avatar-thumbnail avatar-xl position-absolute d-none d-lg-block" href="#">
-                    <img src="~/img/user-profile.jpg" alt="">
+                    <img src="@Model.Image" alt="">
                 </a>
                 <div class="avatar-fixed d-none d-lg-block">
                     <a class="avatar-tile" href="#">
-                        <img src="~/img/user-1.jpg" alt="">
-                        <div><strong>Nathan Drake</strong><span class="d-block">@@nathan</span></div>
+                        <img src="@Model.Image" alt="">
+                        <div><strong>@Model.UserName</strong>></div>
                     </a>
                 </div>
                 <div class="nav-scroll">
@@ -56,11 +55,11 @@
                         <i class="ya ya-gear"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item"
-                           href="profile-settings.html">Settings</a><a class="dropdown-item" href="#">
+                        <a class="dropdown-item" asp-page="/Account/Manage/Profile/EditProfile" asp-area="Identity" asp-route-id="@Model.Id">Settings</a><a class="dropdown-item">
                             Edit
                             Games
-                        </a><a class="dropdown-item" href="#">Mail</a>
+                        </a>
+                        <a class="dropdown-item" asp-page="Account/Manage/ChangePassword" asp-area="Identity">Change password</a>
                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#">History</a><a class="dropdown-item" href="#">Security</a>
                     </div>
                 </div>
@@ -76,19 +75,10 @@
                     <div class="widget-header">About me</div>
                     <div class="widget-body">
                         <p>
-                            I am a frontend developer &amp; web designer. I love to work on creative and
-                            standalone projects like gameforest.
+                            @Model.AboutMe
                         </p>
                         <p class="font-size-sm font-weight-semibold mb-1">
-                            <i class="ya ya-pin mr-1"></i>
-                            Budapest
-                        </p>
-                        <p class="font-size-sm font-weight-semibold mb-1">
-                            <i class="ya ya-twitter mr-1"></i>
-                            <a href="https://twitter.com/yakuthemes" target="_blank">yakuthemes</a>
-                        </p>
-                        <p class="font-size-sm font-weight-semibold mb-1">
-                            <i class="ya ya-calendar mr-1"></i> Joined December 2009
+                            <i class="ya ya-calendar mr-1"></i>Birthday: @Model.Birthday
                         </p><a class="btn btn-outline btn-sm btn-block mt-3" href="#" role="button">
                             Send
                             message
@@ -120,7 +110,7 @@
                             <img src="~/img/user-3.jpg" alt="Elizabeth"><span class="badge badge-warning"></span>
                         </a><a href="#" data-toggle="tooltip"
                                title="Trevor"><img src="~/img/user-4.jpg" alt="Trevor"></a><a href="#"
-                                                                                            data-toggle="tooltip" title="Clark Kent">
+                                                                                              data-toggle="tooltip" title="Clark Kent">
                             <img src="~/img/user-5.jpg"
                                  alt="Clark Kent"><span class="badge badge-success"></span>
                         </a><a href="#"
@@ -140,7 +130,7 @@
                             <img src="~/img/user-8.jpg" alt="Lara Croft">
                         </a><a href="#" data-toggle="tooltip"
                                title="punisher"><img src="~/img/user-9.jpg" alt="punisher"></a><a href="#"
-                                                                                                data-toggle="tooltip" title="celebro">
+                                                                                                  data-toggle="tooltip" title="celebro">
                             <img src="~/img/user-10.jpg"
                                  alt="celebro">
                         </a><a href="#" data-toggle="tooltip" title="Hitman">
@@ -183,7 +173,7 @@
                                      aria-labelledby="status-tab">
                                     <div class="d-flex">
                                         <img class="avatar avatar-sm rounded-circle"
-                                             src="~/img/user-1.jpg" alt="">
+                                             src="@Model.Image" alt="">
                                         <div class="pl-2 flex-grow-1">
                                             <div class="form-group mb-0">
                                                 <textarea class="form-control border-0 shadow-none" rows="5"
@@ -212,10 +202,10 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center bg-lighten">
                         <div class="avatar-badge avatar-sm mr-3">
-                            <img src="~/img/user-1.jpg" alt=""><span class="badge badge-success"></span>
+                            <img src="@Model.Image" alt=""><span class="badge badge-success"></span>
                         </div>
                         <div>
-                            <h5 class="card-title"><a href="#">Nathan Drake</a></h5><span class="text-muted font-size-sm">7 hours ago</span>
+                            <h5 class="card-title"><a href="#">@Model.UserName</a></h5><span class="text-muted font-size-sm">7 hours ago</span>
                         </div>
                         <div class="dropdown ml-auto">
                             <button class="btn btn-link btn-block btn-icon"
@@ -248,10 +238,10 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="avatar-stack">
-                            <img class="avatar" src="~/img/user-1.jpg"
-                                 alt="Nathan Drake"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
-                                                                                                                                                                       src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
-                                                                                                                                                                                                              alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
+                            <img class="avatar" src="@Model.Image"
+                                 alt="@Model.UserName"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
+                                                                                                                                                                           src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
+                                                                                                                                                                                                                    alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
                                 <a href="profile.html">Elizabeth</a>,<a href="profile.html">Venom</a> and
                                 more 30 people like it.
                             </span>
@@ -269,10 +259,10 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center bg-lighten">
                         <div class="avatar-badge avatar-sm mr-3">
-                            <img src="~/img/user-1.jpg" alt=""><span class="badge badge-success"></span>
+                            <img src="@Model.Image" alt=""><span class="badge badge-success"></span>
                         </div>
                         <div>
-                            <h5 class="card-title"><a href="#">Nathan Drake</a></h5><span class="text-muted font-size-sm">8 hours ago</span>
+                            <h5 class="card-title"><a href="#">@Model.UserName</a></h5><span class="text-muted font-size-sm">8 hours ago</span>
                         </div>
                         <div class="dropdown ml-auto">
                             <button class="btn btn-link btn-block btn-icon"
@@ -298,10 +288,10 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="avatar-stack">
-                            <img class="avatar" src="~/img/user-1.jpg"
-                                 alt="Nathan Drake"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
-                                                                                                                                                                       src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
-                                                                                                                                                                                                              alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
+                            <img class="avatar" src="@Model.Image"
+                                 alt="@Model.UserName"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
+                                                                                                                                                                           src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
+                                                                                                                                                                                                                    alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
                                 <a href="profile.html">Elizabeth</a>,<a href="profile.html">Venom</a> and
                                 more 45 people like it.
                             </span>
@@ -330,7 +320,7 @@
                         <div class="media px-4">
                             <div class="avatar avatar-badge">
                                 <img src="~/img/user-3.jpg" alt="Elizabeth"><a class="badge badge-primary" href="#" data-toggle="tooltip"
-                                                                             data-placement="bottom" title="Add friend">
+                                                                               data-placement="bottom" title="Add friend">
                                     <i class="ya ya-user-add"></i>
                                 </a>
                             </div>
@@ -365,11 +355,11 @@
                             </div>
                         </div><!-- end .media -->
                         <div class="media px-4">
-                            <div class="avatar"><img src="~/img/user-1.jpg" alt="Nathan Drake"></div>
+                            <div class="avatar"><img src="@Model.Image" alt="@Model.UserName"></div>
                             <div class="media-body">
                                 <div class="d-flex">
                                     <div class="d-flex">
-                                        <a class="h6" href="profile.html">Nathan Drake</a>
+                                        <a class="h6" href="profile.html">@Model.UserName</a>
                                         <div class="media-meta">12 hours ago</div>
                                     </div>
                                     <div class="media-tools">
@@ -504,10 +494,10 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="avatar-stack">
-                            <img class="avatar" src="~/img/user-1.jpg"
-                                 alt="Nathan Drake"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
-                                                                                                                                                                       src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
-                                                                                                                                                                                                              alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
+                            <img class="avatar" src="@Model.Image"
+                                 alt="@Model.UserName"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
+                                                                                                                                                                           src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
+                                                                                                                                                                                                                    alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
                                 <a href="profile.html">Elizabeth</a>,<a href="profile.html">Venom</a> and
                                 more 19 people like it.
                             </span>
@@ -525,10 +515,10 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center bg-lighten">
                         <div class="avatar-badge avatar-sm mr-3">
-                            <img src="~/img/user-1.jpg" alt=""><span class="badge badge-success"></span>
+                            <img src="@Model.Image" alt=""><span class="badge badge-success"></span>
                         </div>
                         <div>
-                            <h5 class="card-title"><a href="#">Nathan Drake</a></h5><span class="text-muted font-size-sm">13 hours ago</span>
+                            <h5 class="card-title"><a href="#">@Model.UserName</a></h5><span class="text-muted font-size-sm">13 hours ago</span>
                         </div>
                         <div class="dropdown ml-auto">
                             <button class="btn btn-link btn-block btn-icon"
@@ -569,10 +559,10 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="avatar-stack">
-                            <img class="avatar" src="~/img/user-1.jpg"
-                                 alt="Nathan Drake"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
-                                                                                                                                                                       src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
-                                                                                                                                                                                                              alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
+                            <img class="avatar" src="@Model.Image"
+                                 alt="@Model.UserName"><img class="avatar" src="~/img/user-2.jpg" alt="Venom"><img class="avatar" src="~/img/user-3.jpg" alt="Elizabeth"><img class="avatar"
+                                                                                                                                                                           src="~/img/user-4.jpg" alt="Trevor"><img class="avatar" src="~/img/user-5.jpg"
+                                                                                                                                                                                                                    alt="Clark Kent"><span class="avatar-text d-none d-md-inline d-lg-none d-xl-inline">
                                 <a href="profile.html">Elizabeth</a>,<a href="profile.html">Venom</a> and
                                 more 37 people like it.
                             </span>

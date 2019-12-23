@@ -110,7 +110,7 @@ namespace GamesSearchAsp.Areas.Identity.Pages.Account.Manage.Profile
                     
                 }
                 await userManager.UpdateAsync(user);
-                return RedirectToAction("Index", "Home");
+                return RedirectToPage("Profile", Id);
             }
             else
             {
