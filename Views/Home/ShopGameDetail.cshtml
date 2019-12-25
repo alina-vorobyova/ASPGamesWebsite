@@ -38,18 +38,18 @@
                         <h1 class="font-weight-bold">@Model.Game.name</h1>
                         <div class="d-flex align-items-center">
                             @*<div class="star d-flex font-size-md mr-2">
-                                    <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i><i class="ya ya-star text-muted"></i>
-                                </div>*@
+                        <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i><i class="ya ya-star text-muted"></i>
+                    </div>*@
                             @*<div class="text-muted">
-                                    <span class="font-weight-semibold">25</span> Reviews
-                                </div>*@
+                        <span class="font-weight-semibold">25</span> Reviews
+                    </div>*@
                         </div>
                     </div>
                     @*<p class="mb-4">
-                            Red Dead Redemption 2 is an epic tale of life in America’s unforgiving
-                            heartland. The game's vast and atmospheric world also provides the foundation for a
-                            brand new online multiplayer experience. America, 1899. The end of the wild...
-                        </p>*@
+                Red Dead Redemption 2 is an epic tale of life in America’s unforgiving
+                heartland. The game's vast and atmospheric world also provides the foundation for a
+                brand new online multiplayer experience. America, 1899. The end of the wild...
+            </p>*@
                     <ul class="list-inline mb-4 d-flex align-items-center">
                         <li class="list-inline-item display-5 font-weight-bold">$@Model.GameFromDb.Price</li>
                         @*  <li class="list-inline-item text-muted font-weight-light"><del>$90.00</del></li>*@
@@ -86,18 +86,22 @@
                         </div>
                     </div>
                     @*<div class="tags mt-4 mb-4">
-                            <a href="#">#red</a><a href="#">#redemption2</a><a href="#">#large</a><a href="#">#released</a><a href="#">#xbox</a>
-                        </div>*@
-                    <div class="card mb-0">
-                        <div class="card-body">
-                            <button type="submit"
+                <a href="#">#red</a><a href="#">#redemption2</a><a href="#">#large</a><a href="#">#released</a><a href="#">#xbox</a>
+            </div>*@
+
+                </form>
+                <div class="card mb-0">
+                    <div class="card-body">
+                        <form method="post" id="productForm">
+                            <button type="submit" asp-action="AddToCart" asp-controller="Cart" asp-route-gameProduct="@Model.GameFromDb"
                                     class="btn btn-primary btn-block font-weight-semibold btn-lg mb-2">
                                 Add to
                                 cart <i class="ya ya-shopping-cart ml-2"></i>
                             </button>
-                        </div>
+                        </form>
+
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -238,10 +242,10 @@
                                 <a asp-action="ShopGameDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title</a>
                             </h5>
                             @*<div class="star d-flex font-size-md mt-1 mr-2">
-                            <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i>
-                        </div>*@
+                                    <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i>
+                                </div>*@
                             <ul class="list-unstyled font-size-sm mt-3">
-                                <li>@item.GamePlatform.PlatformName</li> 
+                                <li>@item.GamePlatform.PlatformName</li>
                             </ul>
                             <ul class="d-flex list-unstyled mb-0 text-nowrap">
                                 @if (item.Count > 0)
@@ -274,3 +278,13 @@
         </div>
     </div>
 </section>
+
+@section Scripts
+{
+
+    @*<script>
+        $('#productForm').submit(function () {
+            event.preventDefault();
+        });
+    </script>*@
+}

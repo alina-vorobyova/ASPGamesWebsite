@@ -29,6 +29,8 @@ namespace GamesSearchAsp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
+
             services.AddMemoryCache();
 
             services.AddDbContext<GameAppDbContext>(options =>
@@ -48,6 +50,8 @@ namespace GamesSearchAsp
             services.AddScoped<IPostService, PostService>();
 
             services.AddScoped<IReviewService, ReviewService>();
+
+            services.AddScoped<ICartService, CartService>();
 
             services.AddScoped<IGameProductService, GameProductService>();
 
@@ -76,7 +80,10 @@ namespace GamesSearchAsp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
+
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseAuthentication();

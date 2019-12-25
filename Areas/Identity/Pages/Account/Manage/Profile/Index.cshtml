@@ -59,7 +59,7 @@
                             Edit
                             Games
                         </a>
-                        <a class="dropdown-item" asp-page="Account/Manage/ChangePassword" asp-area="Identity">Change password</a>
+                        <a class="dropdown-item" asp-page="/Account/Manage/ChangePassword" asp-area="Identity" asp-route-id="@Model.Id">Change password</a>
                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#">History</a><a class="dropdown-item" href="#">Security</a>
                     </div>
                 </div>
