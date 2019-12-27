@@ -8,8 +8,8 @@ namespace GamesSearchAsp.Services
 {
     public interface ICartService
     {
-        public CartItem Item { get; set; }
-        void Add(GameProduct gameProduct);
+        //public CartItem Item { get; set; }
+        void Add(int id);
         void Remove(int id);
         void ClearCart();
         IEnumerable<CartItem> GetProducts();

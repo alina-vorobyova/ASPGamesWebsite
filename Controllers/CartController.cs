@@ -20,22 +20,19 @@ namespace GamesSearchAsp.Controllers
 
         public IActionResult Index()
         {
+            
             var productList = cartService.GetProducts();
             var model = new CartViewModel {
                 CartItems = productList,
-                Count = cartService.Item.Count,
+                Count = productList.Count(),
                 Total = productList.Sum(x => x.ItemPrice)
             };
             return View(model);
         }
 
-        public void AddToCart(GameProduct gameProduct)
+        public void AddToCart(int id)
         {
-            if (gameProduct != null)
-            {
-                cartService.Item.Count++;
-                cartService.Add(gameProduct);
-            }
+            cartService.Add(id);
             
         }
 

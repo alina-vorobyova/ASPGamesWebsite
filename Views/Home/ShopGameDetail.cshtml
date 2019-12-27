@@ -3,6 +3,7 @@
     ViewData["Title"] = "ShopGameDetail";
 }
 
+
 <section class="pt-0 py-lg-5">
     <div class="container">
         <div class="row">
@@ -93,7 +94,7 @@
                 <div class="card mb-0">
                     <div class="card-body">
                         <form method="post" id="productForm">
-                            <button type="submit" asp-action="AddToCart" asp-controller="Cart" asp-route-gameProduct="@Model.GameFromDb"
+                            <button type="submit" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.GameFromDb.Id"
                                     class="btn btn-primary btn-block font-weight-semibold btn-lg mb-2">
                                 Add to
                                 cart <i class="ya ya-shopping-cart ml-2"></i>

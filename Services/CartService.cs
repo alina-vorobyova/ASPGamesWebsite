@@ -11,23 +11,45 @@ namespace GamesSearchAsp.Services
     public class CartService : ICartService
     {
         private readonly IHttpContextAccessor httpContextAccessor;
-        public CartItem Item { get; set; } = new CartItem();
-        public CartService(IHttpContextAccessor httpContextAccessor)
+        private readonly GameAppDbContext context;
+
+        //public CartItem Item { get; set; } = new CartItem();
+        List<CartItem> CartList { get; set; } = new List<CartItem>();
+        public CartService(IHttpContextAccessor httpContextAccessor, GameAppDbContext context)
         {
             this.httpContextAccessor = httpContextAccessor;
+            this.context = context;
         }
        
-        public void Add(GameProduct gameProduct)
+        public void Add(int id)
         {
-          
-            Item.ItemName = gameProduct.Title;
-            Item.Id = gameProduct.Id;
-            Item.ItemPrice = gameProduct.Price;
-            Item.ItemImage = gameProduct.Image;
-            var cartList = new List<CartItem>();
-            cartList.Add(Item);
+            var gameProduct = context.GameProducts.Find(id);
+            CartItem Item = new CartItem();
+            if (gameProduct != null)
+            {
+                Item.ItemName = gameProduct.Title; 
+                Item.Id = gameProduct.Id;
+                Item.ItemPrice = gameProduct.Price;
+                Item.ItemImage = gameProduct.Image;
+               
+                CartList.Add(Item);
+                if (httpContextAccessor.HttpContext.Session.Keys.Contains("cart"))
+                {
+                    var productList = httpContextAccessor.HttpContext.Session.Get<IEnumerable<CartItem>>("cart").ToList();
+                    //if (productList.Any(x => x.Id == Item.Id))
+                    //{
+                    //    Item.Count++;
+
+                    //}
+                    productList.Add(Item);  
+                    httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", productList);
+                }
+                else
+                {
+                    httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", CartList);
+                }
+            }
             
-            httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", cartList);
         }
 
         public void ClearCart()
