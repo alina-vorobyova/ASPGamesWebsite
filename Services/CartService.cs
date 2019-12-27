@@ -31,17 +31,21 @@ namespace GamesSearchAsp.Services
                 Item.Id = gameProduct.Id;
                 Item.ItemPrice = gameProduct.Price;
                 Item.ItemImage = gameProduct.Image;
+                Item.ItemCount++;
                
                 CartList.Add(Item);
                 if (httpContextAccessor.HttpContext.Session.Keys.Contains("cart"))
                 {
                     var productList = httpContextAccessor.HttpContext.Session.Get<IEnumerable<CartItem>>("cart").ToList();
-                    //if (productList.Any(x => x.Id == Item.Id))
-                    //{
-                    //    Item.Count++;
-
-                    //}
-                    productList.Add(Item);  
+                    if (productList.Any(x => x.Id == Item.Id))
+                    {
+                        var sameGame = productList.FirstOrDefault(x => x.Id == Item.Id);
+                        sameGame.ItemCount++;
+                    }
+                    else
+                    {
+                        productList.Add(Item);
+                    }
                     httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", productList);
                 }
                 else

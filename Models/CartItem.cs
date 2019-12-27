@@ -11,9 +11,8 @@ namespace GamesSearchAsp.Models
         public string ItemName { get; set; }
         public decimal ItemPrice { get; set; }
         public string ItemImage { get; set; }
-        public decimal TotalPrice { get; set; }
-
-        public int Count { get; set; }
+        public decimal ItemTotalPrice { get; set; }
+        public int ItemCount { get; set; }
 
     }
 }
