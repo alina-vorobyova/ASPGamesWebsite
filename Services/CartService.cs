@@ -20,19 +20,19 @@ namespace GamesSearchAsp.Services
             this.httpContextAccessor = httpContextAccessor;
             this.context = context;
         }
-       
+
         public void Add(int id)
         {
             var gameProduct = context.GameProducts.Find(id);
             CartItem Item = new CartItem();
             if (gameProduct != null)
             {
-                Item.ItemName = gameProduct.Title; 
+                Item.ItemName = gameProduct.Title;
                 Item.Id = gameProduct.Id;
                 Item.ItemPrice = gameProduct.Price;
                 Item.ItemImage = gameProduct.Image;
                 Item.ItemCount++;
-               
+                Item.ItemTotalPrice = Item.ItemPrice * Item.ItemCount;
                 CartList.Add(Item);
                 if (httpContextAccessor.HttpContext.Session.Keys.Contains("cart"))
                 {
@@ -41,6 +41,7 @@ namespace GamesSearchAsp.Services
                     {
                         var sameGame = productList.FirstOrDefault(x => x.Id == Item.Id);
                         sameGame.ItemCount++;
+                        sameGame.ItemTotalPrice = sameGame.ItemPrice * sameGame.ItemCount;
                     }
                     else
                     {
@@ -53,7 +54,7 @@ namespace GamesSearchAsp.Services
                     httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", CartList);
                 }
             }
-            
+
         }
 
         public void ClearCart()
@@ -69,7 +70,18 @@ namespace GamesSearchAsp.Services
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            var productList = httpContextAccessor.HttpContext.Session.Get<IEnumerable<CartItem>>("cart").ToList();
+            if (productList.Any(x => x.Id == id))
+            {
+                var game = productList.FirstOrDefault(x => x.Id == id);
+                productList.Remove(game);
+                httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", productList);
+            }
+            else
+            {
+                throw new Exception("Product not found");
+            }
         }
     }
+}
 }

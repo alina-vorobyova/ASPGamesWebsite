@@ -27,7 +27,7 @@ namespace GamesSearchAsp.Controllers
                 {
                     CartItems = productList,
                     Count = productList.Count(),
-                    Total = productList.Sum(x => x.ItemPrice)
+                    Total = productList.Sum(x => x.ItemPrice * x.ItemCount)
                 };
                 return View(model);
             }
@@ -38,6 +38,11 @@ namespace GamesSearchAsp.Controllers
         {
             cartService.Add(id);
             
+        }
+
+        public void RemoveFromCart(int id)
+        {
+            cartService.Remove(id);
         }
 
 
