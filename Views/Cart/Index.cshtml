@@ -81,10 +81,12 @@
                                         </td>
                                         <td class="text-center">$@item.ItemTotalPrice</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-link p-0"
-                                                    data-toggle="tooltip" title="Remove from cart">
-                                                <i class="ya ya-trash"></i>
-                                            </button>
+                                            <form method="post" asp-action="RemoveFromCart" asp-controller="Cart" asp-route-id="@item.Id">
+                                                <button type="submit" class="btn btn-link p-0"
+                                                        data-toggle="tooltip" title="Remove from cart">
+                                                    <i class="ya ya-trash"></i>
+                                                </button>
+                                                </form>
                                         </td>
                                     </tr>
                                 }

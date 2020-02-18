@@ -34,15 +34,17 @@ namespace GamesSearchAsp.Controllers
             return View();
         }
 
-        public void AddToCart(int id)
+        public IActionResult AddToCart(int id)
         {
             cartService.Add(id);
-            
+            return RedirectToAction("Index");
+
         }
 
-        public void RemoveFromCart(int id)
+        public IActionResult RemoveFromCart(int id)
         {
             cartService.Remove(id);
+            return RedirectToAction("Index");
         }
 
 
