@@ -44,22 +44,25 @@ namespace GamesSearchAsp.Services
                         sameGame.ItemTotalPrice = sameGame.ItemPrice * sameGame.ItemCount;
                     }
                     else
-                    {
                         productList.Add(Item);
-                    }
                     httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", productList);
                 }
                 else
-                {
                     httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", CartList);
-                }
             }
+            else
+                throw new Exception("Product not found");
 
         }
 
         public void ClearCart()
         {
-            throw new NotImplementedException();
+            var productList = httpContextAccessor.HttpContext.Session.Get<IEnumerable<CartItem>>("cart").ToList();
+            if (productList.Count > 0)
+            {
+                productList.Clear();
+                httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", productList);
+            }
         }
 
         public IEnumerable<CartItem> GetProducts()
@@ -78,9 +81,7 @@ namespace GamesSearchAsp.Services
                 httpContextAccessor.HttpContext.Session.Set<IEnumerable<CartItem>>("cart", productList);
             }
             else
-            {
                 throw new Exception("Product not found");
-            }
         }
     }
 }

@@ -37,8 +37,7 @@ namespace GamesSearchAsp.Controllers
         public IActionResult AddToCart(int id)
         {
             cartService.Add(id);
-            return RedirectToAction("Index");
-
+            return RedirectToAction("Shop", "Home");
         }
 
         public IActionResult RemoveFromCart(int id)
@@ -47,7 +46,11 @@ namespace GamesSearchAsp.Controllers
             return RedirectToAction("Index");
         }
 
-
+        public IActionResult ClearCart()
+        {
+            cartService.ClearCart();
+            return RedirectToAction("Index");
+        }
 
 
     }

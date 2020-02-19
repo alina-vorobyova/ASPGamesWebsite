@@ -44,9 +44,12 @@
                         </ul>
                     </div>
                     <div class="card-footer d-flex align-items-center">
-                        <div class="h3 font-weight-normal text-dark mb-0 mr-2">$@item.Price</div><button type="button" class="btn btn-outline btn-sm ml-auto">
-                            Add to cart <i class="ya ya-shopping-cart"></i>
-                        </button>
+                        <div class="h3 font-weight-normal text-dark mb-0 mr-2">$@item.Price</div>
+                        <form method="post" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.Id">
+                            <button type="submit" class="btn btn-outline btn-sm ml-auto">
+                                Add to cart <i class="ya ya-shopping-cart"></i>
+                            </button>
+                        </form>
                     </div>
                 </div><!-- end .card -->
             </div>

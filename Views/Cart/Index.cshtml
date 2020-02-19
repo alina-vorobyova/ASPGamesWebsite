@@ -106,9 +106,12 @@
                     </button>
                 </form>
                 <div class="d-flex d-md-block flex-column ml-md-auto">
-                    <button class="btn btn-outline mr-md-1 mb-2 mb-md-0" type="button">
-                        Update Cart
-                    </button><a class="btn btn-primary" href="shop-checkout.html" role="button">Proceed to Checkout</a>
+                    <form method="post" asp-action="ClearCart" asp-controller="Cart">
+                        <button class="btn btn-outline mr-md-1 mb-2 mb-md-0" type="submit">
+                            Clear Cart
+                        </button>
+                    </form>
+                    <a class="btn btn-primary" href="shop-checkout.html" role="button">Proceed to Checkout</a>
                 </div>
             </div>
             <div class="row">
@@ -179,5 +182,8 @@
 }
 else
 {
-   <p>Your cart is empty</p>
+<div class="container">
+    <p>Your cart is empty</p>
+    <img src="~/images/cartEmpty.jpg" alt="Cart is empty" width="400" />
+</div>
 }

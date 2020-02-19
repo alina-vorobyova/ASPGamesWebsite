@@ -39,18 +39,18 @@
                         <h1 class="font-weight-bold">@Model.Game.name</h1>
                         <div class="d-flex align-items-center">
                             @*<div class="star d-flex font-size-md mr-2">
-                        <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i><i class="ya ya-star text-muted"></i>
-                    </div>*@
+                                    <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i><i class="ya ya-star text-muted"></i>
+                                </div>*@
                             @*<div class="text-muted">
-                        <span class="font-weight-semibold">25</span> Reviews
-                    </div>*@
+                                    <span class="font-weight-semibold">25</span> Reviews
+                                </div>*@
                         </div>
                     </div>
                     @*<p class="mb-4">
-                Red Dead Redemption 2 is an epic tale of life in America’s unforgiving
-                heartland. The game's vast and atmospheric world also provides the foundation for a
-                brand new online multiplayer experience. America, 1899. The end of the wild...
-            </p>*@
+                            Red Dead Redemption 2 is an epic tale of life in America’s unforgiving
+                            heartland. The game's vast and atmospheric world also provides the foundation for a
+                            brand new online multiplayer experience. America, 1899. The end of the wild...
+                        </p>*@
                     <ul class="list-inline mb-4 d-flex align-items-center">
                         <li class="list-inline-item display-5 font-weight-bold">$@Model.GameFromDb.Price</li>
                         @*  <li class="list-inline-item text-muted font-weight-light"><del>$90.00</del></li>*@
@@ -87,8 +87,8 @@
                         </div>
                     </div>
                     @*<div class="tags mt-4 mb-4">
-                <a href="#">#red</a><a href="#">#redemption2</a><a href="#">#large</a><a href="#">#released</a><a href="#">#xbox</a>
-            </div>*@
+                            <a href="#">#red</a><a href="#">#redemption2</a><a href="#">#large</a><a href="#">#released</a><a href="#">#xbox</a>
+                        </div>*@
 
                 </form>
                 <div class="card mb-0">
@@ -226,66 +226,61 @@
     </div>
 </section>
 
-<section class="py-5">
-    <div class="container">
-        <h6 class="subtitle mb-4">You should also like</h6>
-        <div class="row row-md">
-            @foreach (var item in Model.SimilarGames)
-            {
-                <div class="col-sm-6 col-md-4 col-lg-3 card-group">
-                    <div class="card card-sm mb-4">
-                        <a class="card-img card-img-md" href="shop-product.html">
-                            <img class="card-img-top" src="@item.Image"
-                                 alt="God of War">
-                        </a>
-                        <div class="card-body d-flex align-items-start flex-column">
-                            <h5 class="card-title mb-auto">
-                                <a asp-action="ShopGameDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title</a>
-                            </h5>
-                            @*<div class="star d-flex font-size-md mt-1 mr-2">
-                                    <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i>
-                                </div>*@
-                            <ul class="list-unstyled font-size-sm mt-3">
-                                <li>@item.GamePlatform.PlatformName</li>
-                            </ul>
-                            <ul class="d-flex list-unstyled mb-0 text-nowrap">
-                                @if (item.Count > 0)
-                                {
-                                    <li class="border-right mr-2 pr-2">
-                                        <i class="ya ya-stock text-success mr-1"></i>
-                                        in stock
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="border-right mr-2 pr-2">
-                                        <i class="ya ya-stock text-danger mr-1"></i>
-                                        not in stock
-                                    </li>
-                                }
 
-                                <li><i class="ya ya-delivery text-success mr-1"></i> free delivery</li>
-                            </ul>
-                        </div>
-                        <div class="card-footer d-flex align-items-center">
-                            <div class="h3 font-weight-normal text-dark mb-0 mr-2">$@item.Price</div><button type="button" class="btn btn-outline btn-sm ml-auto">
-                                Add to cart <i class="ya ya-shopping-cart"></i>
-                            </button>
-                        </div>
-                    </div><!-- end .card -->
-                </div>
-
-            }
-        </div>
-    </div>
-</section>
-
-@section Scripts
+@if (Model.SimilarGames.Count() > 0)
 {
+    <section class="py-5">
+        <div class="container">
+            <h6 class="subtitle mb-4">You should also like</h6>
+            <div class="row row-md">
+                @foreach (var item in Model.SimilarGames)
+                {
+                    <div class="col-sm-6 col-md-4 col-lg-3 card-group">
+                        <div class="card card-sm mb-4">
+                            <a class="card-img card-img-md" href="shop-product.html">
+                                <img class="card-img-top" src="@item.Image"
+                                     alt="God of War">
+                            </a>
+                            <div class="card-body d-flex align-items-start flex-column">
+                                <h5 class="card-title mb-auto">
+                                    <a asp-action="ShopGameDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title</a>
+                                </h5>
+                                @*<div class="star d-flex font-size-md mt-1 mr-2">
+                                        <i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-warning"></i><i class="ya ya-star text-muted"></i>
+                                    </div>*@
+                                <ul class="list-unstyled font-size-sm mt-3">
+                                    <li>@item.GamePlatform.PlatformName</li>
+                                </ul>
+                                <ul class="d-flex list-unstyled mb-0 text-nowrap">
+                                    @if (item.Count > 0)
+                                    {
+                                        <li class="border-right mr-2 pr-2">
+                                            <i class="ya ya-stock text-success mr-1"></i>
+                                            in stock
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="border-right mr-2 pr-2">
+                                            <i class="ya ya-stock text-danger mr-1"></i>
+                                            not in stock
+                                        </li>
+                                    }
 
-    @*<script>
-        $('#productForm').submit(function () {
-            event.preventDefault();
-        });
-    </script>*@
+                                    <li><i class="ya ya-delivery text-success mr-1"></i> free delivery</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer d-flex align-items-center">
+                                <div class="h3 font-weight-normal text-dark mb-0 mr-2">$@item.Price</div><button type="button" class="btn btn-outline btn-sm ml-auto">
+                                    Add to cart <i class="ya ya-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div><!-- end .card -->
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
 }
+
